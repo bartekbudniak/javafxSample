@@ -19,9 +19,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         GridPane root = new GridPane();
 
-        for (int i = 0; i < ControlType.values().length; i++) {
-            controls.add(new Control(ControlType.values()[i], ControlType.values()[i].description));
-        }
+        controls.add(new Control(ControlType.BUTTON, "enables a JavaFX application to have some action executed when the application user clicks the button"));
+        controls.add(new Control(ControlType.TEXT_FIELD, "allows the user to enter a line of unformatted text"));
+        controls.add(new Control(ControlType.COMBO_BOX, "enables users to choose one of several options"));
+        controls.add(new Control(ControlType.DATE_PICKER, "allows to select the date from the popup calendar or type the text manually in the text field of date-picker"));
+        controls.add(new Control(ControlType.TABLE_VIEW, " is designed to visualize an unlimited number of rows of data, broken out into columns"));
 
         Scene scene = new Scene(root,800,800);
 
@@ -44,9 +46,9 @@ public class Main extends Application {
         tableColumnType.setCellValueFactory(new PropertyValueFactory<>("controlType"));
         tableColumnType.setMinWidth(100);
 
-        TableColumn<Control, ControlType> tableColumnDescription = new TableColumn<>("Description");
+        TableColumn<Control, String> tableColumnDescription = new TableColumn<>("Description");
         tableColumnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        tableColumnDescription.setMinWidth(100);
+        tableColumnDescription.setMinWidth(400);
 
         tableViewControls.getColumns().addAll(tableColumnType, tableColumnDescription);
         root.add(tableViewControls,0,1);
