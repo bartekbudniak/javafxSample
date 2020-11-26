@@ -1,14 +1,11 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -22,7 +19,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         GridPane root = new GridPane();
 
-        controls.add(new Control(ControlType.BUTTON, "sample"));
+        for (int i = 0; i < ControlType.values().length; i++) {
+            controls.add(new Control(ControlType.values()[i], ControlType.values()[i].description));
+        }
 
         Scene scene = new Scene(root,800,800);
 
@@ -38,7 +37,6 @@ public class Main extends Application {
         root.setAlignment(Pos.CENTER);
         root.setVgap(50);
         root.setHgap(50);
-
 
         TableView<Control> tableViewControls = new TableView<>();
 
