@@ -17,7 +17,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        GridPane root = new GridPane();
 
         controls.add(new Control(ControlType.BUTTON, "enables a JavaFX application to have some action executed when the application user clicks the button"));
         controls.add(new Control(ControlType.TEXT_FIELD, "allows the user to enter a line of unformatted text"));
@@ -25,8 +24,10 @@ public class Main extends Application {
         controls.add(new Control(ControlType.DATE_PICKER, "allows to select the date from the popup calendar or type the text manually in the text field of date-picker"));
         controls.add(new Control(ControlType.TABLE_VIEW, " is designed to visualize an unlimited number of rows of data, broken out into columns"));
 
+        GridPane root = new GridPane();
         Scene scene = new Scene(root,800,800);
 
+        stage.setTitle("Controls");
         stage.setScene(scene);
         stage.show();
 
@@ -34,12 +35,6 @@ public class Main extends Application {
     }
 
     public void controlsLayout(List<Control> controls){
-        GridPane root = new GridPane();
-        stage.setTitle("Controls");
-        root.setAlignment(Pos.CENTER);
-        root.setVgap(50);
-        root.setHgap(50);
-
         TableView<Control> tableViewControls = new TableView<>();
 
         TableColumn<Control, ControlType> tableColumnType = new TableColumn<>("Control type");
@@ -51,8 +46,6 @@ public class Main extends Application {
         tableColumnDescription.setMinWidth(400);
 
         tableViewControls.getColumns().addAll(tableColumnType, tableColumnDescription);
-        root.add(tableViewControls,0,1);
-
         tableViewControls.getItems().addAll(controls);
 
         TextField textFieldSearch = new TextField();
@@ -67,11 +60,16 @@ public class Main extends Application {
                 tableViewControls.getItems().addAll(Controls.filtered(controls, textFieldSearch.getText()));
             }
         });
+
+        GridPane root = new GridPane();
+        root.setAlignment(Pos.CENTER);
+        root.setVgap(50);
+        root.setHgap(50);
         root.add(textFieldSearch, 0,0);
+        root.add(tableViewControls,0,1);
 
         stage.getScene().setRoot(root);
     }
-
 
     public static void main(String[] args) {
         launch(args);
